@@ -3,5 +3,8 @@
 ### Mini Project 2
 
 import pandas as pd
-import numpy as np
 import matplotlib.pyplot as plt
+
+movies = pd.read_csv("movie_info.csv")
+
+print(movies.head())
