@@ -3,7 +3,6 @@
 ### Mini Project 2
 
 import pandas as pd
-import numpy as np
 import matplotlib.pyplot as plt
 from pathlib import Path
 import textwrap
@@ -88,7 +87,7 @@ plt.show()
 sample_size = 1000
 sample_movies = movies.sample(n=sample_size)
 
-# Getting data and creating plot
+# Getting data and creating plot with random sample
 plt.figure(figsize=(10, 6))
 plt.scatter(sample_movies['critic_score'], sample_movies['audience_score'], color='blue', alpha=0.5, label='Critic Scores')
 plt.scatter(sample_movies['audience_score'], sample_movies['critic_score'], color='orange', alpha=0.5, label='Audience Scores')
@@ -106,4 +105,43 @@ plt.ylim(0, 100)
 
 # Saving plot as png
 plt.savefig('charts/critic_vs_audience_scatter_sampled.png')
+plt.show()
+
+# Fifth chart (Box Plot): Score Differences
+# Getting Random sample of movies
+sample_size = 500
+sample_movies = movies.sample(n=sample_size)
+
+# Calculating the score difference between audience and critics
+sample_movies['score_difference'] = sample_movies['audience_score'] - sample_movies['critic_score']
+
+# Checking for any NaN values and removing them
+sample_movies = sample_movies.dropna(subset=['score_difference'])
+
+# Plotting data in boxplot
+plt.figure(figsize=(12, 8))
+plt.boxplot(sample_movies['score_difference'], vert=False, showfliers=True)
+
+# Setting up labels
+plt.title('Score Difference (Audience - Critics) (Sampled)')
+plt.xlabel('Score Difference (%)')
+plt.grid(True)
+
+# Calculating and setting x-axis limits
+low_score = sample_movies['score_difference'].min() - (sample_movies['score_difference'].min() * 0.05)
+high_score = sample_movies['score_difference'].max() + (sample_movies['score_difference'].max() * 0.05)
+plt.xlim(low_score, high_score)
+
+# Set x-axis to start and stop at low score and high score respectively
+# Setting ticks to go by 5
+plt.xticks(range(int(low_score), int(high_score) + 1, 5))
+
+# Show summary statistics of sampled data
+print("\nBoxplot Data (Audience - Critics) (Sampled)")
+print("\nPositive values indicate audience scores are higher than critics.")
+print("Negative values indicate critics rated higher than audiences.\n")
+print(sample_movies['score_difference'].describe())
+
+# Saving plot as png
+plt.savefig('charts/score_difference.png')
 plt.show()
