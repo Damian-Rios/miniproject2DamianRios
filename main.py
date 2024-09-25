@@ -3,6 +3,7 @@
 ### Mini Project 2
 
 import pandas as pd
+import numpy as np
 import matplotlib.pyplot as plt
 from pathlib import Path
 import textwrap
@@ -80,4 +81,29 @@ plt.grid(False)
 
 # Save plot as png
 plt.savefig('charts/audience_score_distribution.png')
+plt.show()
+
+# Fourth chart (Scatter Plot): Critic vs Audience Scores
+# Getting Random sample of movies
+sample_size = 1000
+sample_movies = movies.sample(n=sample_size)
+
+# Getting data and creating plot
+plt.figure(figsize=(10, 6))
+plt.scatter(sample_movies['critic_score'], sample_movies['audience_score'], color='blue', alpha=0.5, label='Critic Scores')
+plt.scatter(sample_movies['audience_score'], sample_movies['critic_score'], color='orange', alpha=0.5, label='Audience Scores')
+
+# Setting up labels
+plt.title('Critic Score vs Audience Score (Sampled)')
+plt.xlabel('Critic Score (%)')
+plt.ylabel('Audience Score (%)')
+plt.legend()
+plt.grid(True)
+
+# Setting axis limits to start/end at edge
+plt.xlim(0, 100)
+plt.ylim(0, 100)
+
+# Saving plot as png
+plt.savefig('charts/critic_vs_audience_scatter_sampled.png')
 plt.show()
