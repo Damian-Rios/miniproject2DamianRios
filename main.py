@@ -44,3 +44,21 @@ plt.tight_layout()
 # Save plot as png
 plt.savefig('charts/critic_audience_comparison.png')
 plt.show()
+
+# Second chart (Histogram): Distribution of Critic Scores
+# Getting data and plotting
+plt.figure(figsize=(10, 6))
+movies['critic_score'].hist(bins=25, color='skyblue', edgecolor='black')
+
+# Setting x-axis to start/end at edge
+plt.xlim(0, 100)
+
+# Setting up labels
+plt.title('Distribution of Critic Scores')
+plt.xlabel('Critic Score (%)')
+plt.ylabel('Number of Movies')
+plt.grid(False)
+
+# Save plot as png
+plt.savefig('charts/critic_score_distribution.png')
+plt.show()
