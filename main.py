@@ -62,3 +62,22 @@ plt.grid(False)
 # Save plot as png
 plt.savefig('charts/critic_score_distribution.png')
 plt.show()
+
+# Third chart (Histogram): Distribution of Audience Scores
+# Pretty much the exact same as chart 2 but with audience scores instead of critic scores
+# Getting data and plotting
+plt.figure(figsize=(10, 6))
+movies['audience_score'].hist(bins=25, color='#FFDE7A', edgecolor='black')
+
+# Setting x-axis to start/end at edge
+plt.xlim(0, 100)
+
+# Setting up labels
+plt.title('Distribution of Audience Scores')
+plt.xlabel('Audience Score (%)')
+plt.ylabel('Number of Movies')
+plt.grid(False)
+
+# Save plot as png
+plt.savefig('charts/audience_score_distribution.png')
+plt.show()
